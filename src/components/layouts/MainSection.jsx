@@ -29,6 +29,25 @@ function MainSection() {
                     </div>
                 </div>
             </div>
+            <div className='mt-4 p-7 flex-col items-center overflow-x-hidden text-center'>
+                <h1 className='text-3xl sm:text-4xl font-bold font-merienda p-7 text-center'>
+                    Trusted by food vendors countrywide
+                </h1>
+                <p className='text-gray-700 leading-relaxed text-center p-4'>
+                    Our partners rely on us to streamline operations, and strengthen funding applications. <br />
+                    We're here to help your pantry thrive and feed your community faster.
+                </p>
+                <p className='text-gray-700 leading-relaxed p-4'>
+                    Food vendors benefit in many ways by redirecting their surplus food through such a platform.
+                    They strengthen community ties by helping local people in need while also cutting disposal
+                    costs since less food ends up as waste. In some regions, they can even access tax and legal
+                    incentives for donating excess food. Beyond the financial advantages, vendors differentiate
+                    themselves from competitors with a unique value-add, attract conscious customers who prefer
+                    to support socially responsible businesses, and boost staff morale as employees feel proud
+                    to be part of a meaningful cause. The platform also simplifies logistics by providing a
+                    streamlined process, removing the hassle of manually finding where to send surplus food.
+                </p>
+            </div>
         </>
     );
 }

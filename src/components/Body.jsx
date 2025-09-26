@@ -1,6 +1,7 @@
 import Header from "./layouts/Header";
 import HeroSection from "./layouts/HeroSection";
 import MainSection from "./layouts/MainSection";
+import Footer from "./layouts/Footer";
 
 
 function Body() {
@@ -9,6 +10,7 @@ function Body() {
             <Header />
             <HeroSection />
             <MainSection />
+            <Footer />
         </div>
     )
 }
