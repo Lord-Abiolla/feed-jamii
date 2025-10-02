@@ -19,7 +19,7 @@ function SignIn() {
                             Don't have an account?
                         </p>
                         <Link className="underline" to={"/signup"}>
-                            Create account
+                            Sign up here
                         </Link>
                     </div>
                 </div>
