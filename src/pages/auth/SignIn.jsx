@@ -12,6 +12,7 @@ function SignIn() {
     });
 
     const navigate = useNavigate();
+    const [error, setError] = useState("");
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -31,12 +32,16 @@ function SignIn() {
         if (existingUser) {
             navigate("/dashboard")
         } else {
-            throw new Error("Invalid username or password!");
+            setError("Invalid username or password!");
+            setTimeout(() => {
+                setError("");
+            }, 2000)
         }
     }
 
     return (
         <div className="grid bg-[#EFF5E9] h-screen place-items-center">
+
             <div className="bg-[#C3D9AC] mx-auto w-l shadow rounded-3xl p-4 text-center">
                 <h1 className="font-bold text-2xl mb-4 mt-7">Sign In</h1>
 
@@ -51,6 +56,7 @@ function SignIn() {
                         placeholder="Username"
                         onChange={handleChange}
                         required />
+                    {error && (<p className="text-red-700 font-semibold text-sm">{error}</p>)}
                     <input
                         className="bg-[#EFF5E9] rounded-2xl w-80 p-4 m-3 shadow-xl outline-none"
                         type="password"
@@ -58,6 +64,7 @@ function SignIn() {
                         placeholder="Password"
                         onChange={handleChange}
                         required />
+                    {error && (<p className="text-red-700 font-semibold text-sm">{error}</p>)}
 
                     <button
                         className="bg-[#30573B] rounded-4xl w-70 text-white font-bold p-3 mt-4 cursor-pointer shadow-2xl"
