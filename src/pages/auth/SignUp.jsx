@@ -3,15 +3,17 @@ import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 
-const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-
 const createUser = async (newUser) => {
     const stored = localStorage.getItem("users");
     const users = stored ? JSON.parse(stored) : [];
+
+    const existing = users.find(user => user.email === newUser.email);
+    if (existing) {
+        throw new Error("User email already exists!");
+    }
+
     const updated = [...users, newUser];
     localStorage.setItem("users", JSON.stringify(updated));
-
-    await wait(3000);
 
     return newUser;
 }
@@ -29,9 +31,12 @@ function SignUp() {
     const mutation = useMutation({
         mutationFn: createUser,
         onSuccess: (data) => {
-            console.log(data);
             setFormData({ username: "", email: "", password: "" });
             navigate("/signin")
+        },
+        onError: (error) => {
+            setFormData({ username: "", email: "", password: "" })
+            alert(error.message);
         }
     });
 
@@ -97,7 +102,7 @@ function SignUp() {
                             Already have an account?
                         </p>
                         <Link className="underline" to={"/signin"}>
-                            Sign in here
+                            Sign In
                         </Link>
                     </div>
                 </form>
