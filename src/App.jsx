@@ -1,5 +1,6 @@
 import { createBrowserRouter, Router, RouterProvider } from "react-router-dom";
 import Dashboard from "./pages/dashboard/Dashboard";
+import ProtectedRoute from "./ProtectedRoute";
 import HomePage from "./pages/home/HomePage";
 import SignUp from "./pages/auth/SignUp";
 import SignIn from "./pages/auth/SignIn";
@@ -23,8 +24,13 @@ const router = createBrowserRouter([
   },
 
   {
-    path: "/dashboard",
-    element: <Dashboard />
+    element: <ProtectedRoute />,
+    children: [
+      {
+        path: "/dashboard",
+        element: <Dashboard />
+      }
+    ]
   }
 ]);
 

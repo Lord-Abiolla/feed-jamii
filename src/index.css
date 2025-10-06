@@ -2,6 +2,7 @@
 
 
 @import "tailwindcss";
+@import "leaflet/dist/leaflet.css";
 
 @theme {
     --font-merienda: Merienda, cursive;
