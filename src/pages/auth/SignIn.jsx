@@ -30,6 +30,7 @@ function SignIn() {
         const existingUser = users.find(user => user.username === formData.username && user.password === formData.password);
 
         if (existingUser) {
+            localStorage.setItem("isLoggedIn", "true")
             navigate("/dashboard")
         } else {
             setError("Invalid username or password!");
