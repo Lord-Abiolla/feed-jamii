@@ -3,76 +3,54 @@ import useMapStore from "../../store/store";
 
 function NearbyFreeFood() {
     const [input, setInput] = useState("");
+    const [isLoading, setIsLoading] = useState(false);
+    const [restaurants, setRestaurants] = useState([]);
     const setUserLocation = useMapStore((s) => s.setUserLocation);
-    const setNearbyPlaces = useMapStore((s) => s.setNearbyPlaces);
 
     const handleGetFood = async (e) => {
         e.preventDefault();
+        setRestaurants([]);
+
 
         if (!input.trim()) return alert("Please enter a location");
 
         try {
-            // Step 1: Geocode input
-            const response = await fetch(
-                `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(
-                    input
-                )}`
-            );
-            const data = await response.json();
-
-            if (data.length === 0) {
-                alert("Location not found!");
-                return;
-            }
-
-            const { lat, lon } = data[0];
-            const coords = { lat: parseFloat(lat), lon: parseFloat(lon) };
-            setUserLocation(coords);
-
-            // Step 2: Overpass query
-            const overpassQuery = `
-      [out:json];
-      node["amenity"="restaurant"](around:400,${coords.lat},${coords.lon});
-      out;
-    `;
-
-            const controller = new AbortController();
-            const timeout = setTimeout(() => controller.abort(), 30000);
-
-            const res = await fetch("https://overpass.kumi.systems/api/interpreter", {
+            setIsLoading(true);
+            const response = await fetch("http://localhost:8000/api/closest-restaurants", {
                 method: "POST",
-                body: overpassQuery,
-                signal: controller.signal,
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ place_name: input, radius: 5000 }),
             });
 
-            clearTimeout(timeout);
-
-            if (!res.ok) {
-                throw new Error(`Overpass error: ${res.status}`);
-            }
-
-            const json = await res.json(); // ✅ only call this once
-
-            if (!json.elements || json.elements.length === 0) {
-                alert("No nearby restaurants found!");
+            if (!response.ok) {
+                throw new Error(`Backend error: ${response.status}`);
                 return;
             }
 
-            const sorted = json.elements
-                .filter((el) => el.lat && el.lon)
-                .map((el) => ({
-                    id: el.id,
-                    name: el.tags?.name || "Unnamed Restaurant",
-                    lat: el.lat,
-                    lon: el.lon,
-                    address: el.tags?.["addr:street"] || "Unknown address",
-                }))
-                .slice(0, 3);
+            const data = await response.json();
+            const { user_location, closest_restaurants } = data;
+            setUserLocation({
+                lat: user_location.lat,
+                lon: user_location.lon,
+            });
 
-            setNearbyPlaces(sorted);
+            const formatted = closest_restaurants.map((r) => ({
+                id: r.id,
+                name: r.tags?.name || "Unnamed Restaurant",
+                lat: r.lat,
+                lon: r.lon,
+                address: r.tags?.["addr:street"] || "Unknown address",
+                distance: r.distance_km.toFixed(2) + " km",
+            }));
+            setInput("");
+            setRestaurants(formatted);
         } catch (error) {
-            console.error("Error fetching nearby locations:", error);
-            alert("Error fetching nearby locations. Please try again later.");
+            console.error(error);
+            setInput("");
+        } finally {
+            setIsLoading(false);
         }
     };
 
@@ -85,16 +63,43 @@ function NearbyFreeFood() {
                     value={input}
                     onChange={(e) => setInput(e.target.value)}
                     placeholder="Enter your location"
-                    className="bg-white p-3 rounded-2xl outline-0"
+                    className={`bg-white p-3 rounded-2xl opacity-80 outline-0 ${isLoading ? "opacity-70 cursor-not-allowed" : ""
+                        }`}
+                    disabled={isLoading}
                 />
                 <button
                     type="submit"
-                    className="bg-white p-3 rounded-2xl mt-4 font-bold text-[#30573B] cursor-pointer"
+                    className="bg-white p-3 opacity-90 rounded-2xl mt-4 font-bold text-[#30573B] cursor-pointer"
                 >
-                    Free Food
+                    {isLoading ? "Fetching..." : "Fetch Free Food"}
                 </button>
             </form>
-        </div>
+            {restaurants.length > 0 &&
+                <>
+                    <div className="mt-3 p-3 bg-white rounded-2xl opacity-80">
+                        <h4 className="font-bold text-[#30573B] text-center">Closest free food joints</h4>
+                        {restaurants.map((r) => (
+                            <label
+                                key={r.id}
+                                className="flex items-center cursor-pointer gap-2 border-b border-gray-200 py-2"
+                            >
+                                <input
+                                    type="checkbox"
+                                />
+                                <div>
+                                    <p className="text-sm px-2 py-1">{r.name} <span className="text-red-950">{r.distance}</span>
+                                    </p>
+                                </div>
+                            </label>
+                        ))}
+                    </div>
+                    <div className="mt-4 text-sm text-white text-center">
+                        <p>Select name☝️to get direction</p>
+                    </div>
+                </>
+
+            }
+        </div >
     );
 }
 
