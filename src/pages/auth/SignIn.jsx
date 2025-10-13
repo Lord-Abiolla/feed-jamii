@@ -27,18 +27,23 @@ function SignIn() {
 
         const stored = localStorage.getItem("users");
         const users = stored ? JSON.parse(stored) : [];
-        const existingUser = users.find(user => user.username === formData.username && user.password === formData.password);
+        const existingUser = users.find(
+            (user) =>
+                user.username === formData.username &&
+                user.password === formData.password
+        );
 
         if (existingUser) {
-            localStorage.setItem("isLoggedIn", "true")
-            navigate("/dashboard")
+            localStorage.setItem("isLoggedIn", "true");
+            localStorage.setItem("currentUser", JSON.stringify(existingUser));
+
+            navigate("/dashboard");
         } else {
             setError("Invalid username or password!");
-            setTimeout(() => {
-                setError("");
-            }, 2000)
+            setTimeout(() => setError(""), 2000);
         }
-    }
+    };
+
 
     return (
         <div className="grid bg-[#EFF5E9] h-screen place-items-center">

@@ -1,7 +1,8 @@
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import NavigateMap from "./NavigateMap";
+import Profile from "../Profile";
 import useMapStore from "../../store/store";
-import Routing from "./Routing"; // the component above
+import Routing from "./Routing";
 
 function Map() {
     const userLocation = useMapStore((s) => s.userLocation);
@@ -11,6 +12,9 @@ function Map() {
         <div className="relative w-full h-screen">
             <div className="absolute bottom-30 left-8 top-30 rounded-2xl p-4 bg-[#30573B]/90 z-[900]">
                 <NavigateMap />
+            </div>
+            <div className="bg-[#30573B]/90 absolute top-4 right-6 z-[1000] p-3 rounded-3xl">
+                <Profile />
             </div>
             <div className="absolute w-full">
                 <MapContainer
