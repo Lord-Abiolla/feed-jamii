@@ -19,7 +19,7 @@ function NearbyFreeFood() {
 
         try {
             setIsLoading(true);
-            const response = await fetch("http://127.0.0.1:8000/api/closest-restaurants", {
+            const response = await fetch("https://feed-jamii-api.onrender.com/api/closest-restaurants", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

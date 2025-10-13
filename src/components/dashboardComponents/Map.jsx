@@ -1,6 +1,6 @@
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import NavigateMap from "./NavigateMap";
-import Profile from "../Profile";
+import Profile from "./Profile";
 import useMapStore from "../../store/store";
 import Routing from "./Routing";
 
