@@ -4,7 +4,7 @@ import ProtectedRoute from "./ProtectedRoute";
 import HomePage from "./pages/home/HomePage";
 import SignUp from "./pages/auth/SignUp";
 import SignIn from "./pages/auth/SignIn";
-import NotFound from "./pages/NotFound";
+import NotFound from "./pages/NotFound"
 
 const router = createBrowserRouter([
   {
