@@ -53,16 +53,6 @@ Feed-Jamii integrates the following public APIs for location and mapping data:
 
 **Nominatim API:** This is used for geocoding — converting user-provided addresses or location names into geographic coordinates (latitude and longitude).
 
-## 💡 Future Improvements
-
-- Integration with a backend database for secure user authentication.
-
-- Real-time updates for newly available food donations.
-
-- Notifications to alert users when nearby food opportunities arise.
-
-- Enhanced data visualization and filtering for donors and NGOs.
-
 
 ## 🚀 Usage
 
@@ -131,6 +121,16 @@ Open your browser and visit http://localhost:5173
 
 The front end will communicate with your FastAPI backend to fetch and display data.
 
+
+## 💡 Future Improvements
+
+- Integration with a backend database for secure user authentication.
+
+- Real-time updates for newly available food donations.
+
+- Notifications to alert users when nearby food opportunities arise.
+
+- Enhanced data visualization and filtering for donors and NGOs.
 
 # Author
 **James-Lord Abiolla**
