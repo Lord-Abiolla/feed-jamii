@@ -12,7 +12,7 @@ function HeroSection() {
                     <h2 className='font-merienda text-[60px] font-bold text-green-700 [text-shadow:_7px_7px_0_#1C3C25]'>
                         feed-Jamii
                     </h2>
-                    <p className='font-merienda text-[#07140a] text-[27px] mt-9'>
+                    <p className='font-merienda text-green-900 font-bold text-[30px] mt-9'>
                         A community-driven web app that connects individuals, <br />
                         organizations, and donors to fight hunger by sharing <br />
                         food and essential resources within<br />

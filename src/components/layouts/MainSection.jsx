@@ -3,7 +3,7 @@ import party from '../../assets/fparty1.jpg';
 function MainSection() {
     return (
         <>
-            <div className="mt-3 p-4 bg-white flex flex-col items-center overflow-x-hidden">
+            <div className="mt-12 p-4 bg-white flex flex-col items-center overflow-x-hidden">
                 <h1 className="text-3xl sm:text-4xl font-bold font-merienda p-7 text-center">
                     How we help surplus food producers
                 </h1>
