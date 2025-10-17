@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 function Header() {
     return (
-        <div className="top-4 flex gap-9 items-center justify-between border-1 border-green-700 bg-[#d0dfc0] mb-4 mx-4 rounded-full shadow-2xl sticky z-[1000]">
+        <div className="top-4 flex gap-9 items-center justify-between border-1 border-green-700 bg-[#d0dfc0] mb-4 mx-4 rounded-full shadow-lg sticky z-[1000]">
             <div className="p-2">
                 <h1 className="ml-30 font-merienda text-4xl font-semibold text-center p-3 text-[#1C3C25]">
                     feed-Jamii
