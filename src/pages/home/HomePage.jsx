@@ -1,8 +1,9 @@
 import Header from "../../components/layouts/Header";
 import HeroSection from "../../components/layouts/HeroSection";
-import MainSection from "../../components/layouts/MainSection";
+import Testimonials from "../../components/layouts/Testimonials";
 import Footer from "../../components/layouts/Footer";
 import Clients from "../../components/layouts/Clients";
+import ServicesCard from "../../components/layouts/ServicesCard";
 
 
 function HomePage() {
@@ -11,7 +12,8 @@ function HomePage() {
             <Header />
             <HeroSection />
             <Clients />
-            <MainSection />
+            <ServicesCard />
+            <Testimonials />
             <Footer />
         </div>
     )
