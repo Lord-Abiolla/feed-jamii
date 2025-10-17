@@ -23,7 +23,7 @@ function HeroSection() {
                             Get started here
                         </button>
                     </Link>
-                    <p className='mt-9 text-gray-700 text-sm'>Your information is private and secure</p>
+                    <p className='mt-9 text-gray-700 text-lg font-bold'>Your information is private and secure</p>
                 </div>
             </div>
         </div>
